@@ -117,15 +117,21 @@ router.get(`/search`,async (req,res)=>{
 
    const {email}=req.query;
    const limit=parseInt(req.query.limit) || 10;
+
+   let fond;
    
-   if(!email){
-    res.status(400).json({error:"Email Query is Required"});
+   if(email){
+    fond = await tera.find({
+    email: { $regex: `^${email}$`, $options: "i" }
+   }).limit(limit);
+ 
+   }
+
+   if(!email || fond.length===0){
+    fond =await tera.find().limit(limit);
    }
    
-   const fond = await tera.find({
-    email: { $regex: `^${email}$`, $options: "i" }
-  }).limit(limit);
-
+   
    res.status(200).json(fond);
 })
 
