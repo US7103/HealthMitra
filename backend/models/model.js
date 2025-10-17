@@ -1,6 +1,6 @@
 const mongoose=require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/healthians')
+mongoose.connect('mongodb+srv://recruiter_com:Mycart12119@utkarsh.lx0codb.mongodb.net/')
 
 const tera=mongoose.Schema({
     name:String,
